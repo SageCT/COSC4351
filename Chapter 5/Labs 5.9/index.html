@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <title>CSS Practice</title>
+   <style>
+      #container {
+         width: 600px;
+         height: 280px;
+         border: 2px solid blue;
+         background-color: #f0f0f0;
+         padding: 5px;
+      }
+
+      h2 {
+         font-size: 16pt;
+         font-family: Arial;
+         font-style: italic;
+         color: blue;
+      }
+
+      #yellow {
+         background-color: yellow;
+         float: left;
+         width: 200px;
+         padding: 10px;
+         margin: 0px 10px 0px 0px;
+      }
+
+      #orange {
+         background-color: orange;
+         position: absolute;
+         left: 110px;
+         top: 200px;
+         width: 200px;
+         padding: 10px;
+      }
+
+      #dark-orange {
+         background-color: rgb(255, 80, 0);
+         color: white;
+         float: right;
+         width: 200px;
+         padding: 10px;
+         margin: 20px 40px 0px 0px;
+      }
+   </style>
+</head>
+
+<body>
+   <!-- Requirements -->
+   <!-- 
+      - embedded styling (DONE)
+      - 1 outer div container (DONE)
+         - 600 x 280 pixels, 2px solid blue border, 5px padding, background color is #F0F0F0
+      - 4 div for each verse (children of outer div)
+         _(1) yellow section
+         _(2) no bg color
+            - has no css
+         _(3) orange section
+            - background color of "orange"
+            - positioned at (110px, 200px) with absolute padding
+            - 200px width
+            - 10px padding
+         _(4) dark orange section
+            - background color of "rgb(255, 80, 0)"
+            - white text
+            - floats to right
+            - 200px width
+            - 10px padding
+            - right margin 40px, top margin 20 px, other margins 0 px
+      - title uses h2 tag with 16pt arial font, blue, italicized
+      - don't use br or i tags
+    -->
+
+   <div id="container">
+      <h2>
+         Yesterday
+      </h2>
+      <div id="yellow">
+         Yesterday, All those backups seemed a waste of pay. Now my database has gone away. Oh I believe in yesterday.
+      </div>
+      <div id="plain">
+         Suddenly, There's not half the files there used to be, And there's a milestone hanging over me. The system
+         crashed so suddenly. I pushed something wrong, What it was I could not say.
+      </div>
+      <div id="orange">
+         Now all my data's gone and I long for yesterday-ay-ay-ay.
+      </div>
+      <div id="dark-orange">
+         Yesterday, The need for back-ups seemed so far away. I knew my data was all here to stay, Now I believe in
+         yesterday.
+      </div>
+
+   </div>
+
+</body>
+
+</html>
