@@ -20,22 +20,35 @@ function drawFrog(canvas, x, y, direction = directions.UP) {
    const frogImg = document.querySelector("img");
 
    switch (direction) {
-      case directions.DOWN:
-         // TODO: Translate, rotate, and translate
-         
-         break;
-      case directions.LEFT:
-         // TODO: Translate, rotate, and translate
-                  
-         break;
-      case directions.RIGHT:
-         // TODO: Translate, rotate, and translate
-         
-         break;
+       case directions.DOWN:
+           // Translate the canvas origin to the center of the frog image
+           context.translate(x + frogImg.width / 2, y + frogImg.height / 2);
+           // Rotate 180 degrees for facing down
+           context.rotate(Math.PI);
+           // Translate back to the original origin
+           context.translate(-(x + frogImg.width / 2), -(y + frogImg.height / 2));
+           break;
+       case directions.LEFT:
+           // Translate the canvas origin to the center of the frog image
+           context.translate(x + frogImg.width / 2, y + frogImg.height / 2);
+           // Rotate 90 degrees counterclockwise for facing left
+           context.rotate(-Math.PI / 2);
+           // Translate back to the original origin
+           context.translate(-(x + frogImg.width / 2), -(y + frogImg.height / 2));
+           break;
+       case directions.RIGHT:
+           // Translate the canvas origin to the center of the frog image
+           context.translate(x + frogImg.width / 2, y + frogImg.height / 2);
+           // Rotate 90 degrees clockwise for facing right
+           context.rotate(Math.PI / 2);
+           // Translate back to the original origin
+           context.translate(-(x + frogImg.width / 2), -(y + frogImg.height / 2));
+           break;
+       // For "up" direction, no translation or rotation is needed as it's the default direction
+       default:
+           break;
    }
 
+   // Draw the frog image
    context.drawImage(frogImg, x, y);
-
-   // Necessary so next call to drawFrog isn't rotated or translated
-   context.resetTransform();
 }

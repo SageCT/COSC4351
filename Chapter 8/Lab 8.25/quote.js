@@ -14,12 +14,45 @@ window.addEventListener("DOMContentLoaded", function () {
 
 // TODO: Modify to use Fetch API
 function fetchQuotes(topic, count) {
-   
-   let html = "<ol>";
-   for (let c = 1; c <= count; c++) {
-      html += `<li>Quote ${c} - Anonymous</li>`;
-   }
-   html += "</ol>";
+   // Construct the URL based on the selected topic and count
+   const url = `https://wp.zybooks.com/quotes.php?topic=${topic}&count=${count}`;
 
-   document.querySelector("#quotes").innerHTML = html;
+   // Fetch quotes from the API
+   fetch(url)
+      .then(response => {
+         // Check if the response is successful
+         if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+         }
+         return response.json();
+      })
+      .then(data => {
+         // Clear the existing quotes
+         const quotesDiv = document.querySelector("#quotes");
+         quotesDiv.innerHTML = "";
+
+         // Check if the response contains an error message
+         if (data.error) {
+            // Display the error message
+            quotesDiv.textContent = data.error;
+         } else {
+            // Create an ordered list to display the quotes
+            const ol = document.createElement("ol");
+
+            // Iterate over the quotes and create list items for each
+            data.forEach((quote, index) => {
+               const li = document.createElement("li");
+               li.textContent = `${quote.quote} - ${quote.source}`;
+               ol.appendChild(li);
+            });
+
+            // Append the ordered list to the quotes div
+            quotesDiv.appendChild(ol);
+         }
+      })
+      .catch(error => {
+         // Display any errors that occur during the fetch process
+         const quotesDiv = document.querySelector("#quotes");
+         quotesDiv.textContent = error.message;
+      });
 }

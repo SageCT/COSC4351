@@ -187,4 +187,66 @@ var exchangeRates = {
   }
 };
 
+// Perform conversion
+function convertCurrency() {
+  var usDollars = parseFloat($("#usdInput").val());
+  var selectedOption = $("#toCurrency option:selected").val();
+
+  $("#resultLabel").text(allCurrencies[selectedOption] + ' (' + selectedOption + '):');
+
+  // Perform conversion
+  var convRate = exchangeRates.rates[selectedOption];
+  var result = usDollars * convRate;
+
+  $("#resultCurrency").val(result.toFixed(2));
+}
+
+// Update currency dropdown list to only list currency in the exchange rate object
+function updateCurrencyDropdown() {
+  var selectHTML = '<option value="" disabled selected>Select currency</option>\n';
+
+  for (var currencyAbbrev in exchangeRates.rates) {
+    selectHTML += '<option value="' + currencyAbbrev + '">' + allCurrencies[currencyAbbrev] + ' (' + currencyAbbrev + ')</option>\n';
+  }
+
+  $("#toCurrency").html(selectHTML);
+}
+
+// Update rates, dropdown list, and conversion
+function updateRates() {
+  var exchangeRatesJSON = $("#exchangeRates").val();
+
+  // Update exchange rate object
+  exchangeRates = JSON.parse(exchangeRatesJSON);
+
+  // Update currency dropdown
+  updateCurrencyDropdown();
+
+  // Reset label and value for converted currency
+  $("#resultLabel").text("To Currency ():");
+  $("#resultCurrency").val("---.--");
+}
+
+$(function () {
+  updateCurrencyDropdown();
+  $("#toCurrency").change(convertCurrency);
+  $("#updateRates").click(updateRates);
+});
+
+
+// Initial data for exchange rates
+var exchangeRates = {
+  "disclaimer": "Usage subject to terms: https://openexchangerates.org/terms",
+  "license": "https://openexchangerates.org/license",
+  "timestamp": 1534107604,
+  "base": "USD",
+  "rates": {
+    "BTC": 0.000157753542,
+    "CAD": 1.316853,
+    "EUR": 0.879353,
+    "JPY": 110.46550427,
+    "USD": 1,
+  }
+};
+
 /* Your solution goes here */

@@ -71,17 +71,56 @@ function checkForWinner() {
 }
 
 function newGame() {
-	// TODO: Complete the function
+    clearTimeout(computerMoveTimeout);
+    computerMoveTimeout = 0;
+    const buttons = getGameBoardButtons();
+    for (let button of buttons) {
+        button.innerHTML = "";
+        button.disabled = false;
+    }
+    playerTurn = true;
+    const turnInfo = document.getElementById("turnInfo");
+    turnInfo.textContent = "Your turn";
 }
+
 
 function boardButtonClicked(button) {
-	// TODO: Complete the function
+    if (playerTurn) {
+        button.innerHTML = "X";
+        button.classList.add("x");
+        button.disabled = true;
+        switchTurn();
+    }
 }
 
+
 function switchTurn() {
-	// TODO: Complete the function
+    const status = checkForWinner();
+    if (status === gameStatus.MORE_MOVES_LEFT) {
+        playerTurn = !playerTurn;
+        if (!playerTurn) {
+			turnInfo.textContent = "Computer's turn"
+            computerMoveTimeout = setTimeout(makeComputerMove, 1000);
+        }
+    } else {
+        playerTurn = false;
+        const turnInfo = document.getElementById("turnInfo");
+        if (status === gameStatus.HUMAN_WINS) {
+            turnInfo.textContent = "You win!";
+        } else if (status === gameStatus.COMPUTER_WINS) {
+            turnInfo.textContent = "Computer wins!";
+        } else {
+            turnInfo.textContent = "Draw game";
+        }
+    }
 }
 
 function makeComputerMove() {
-	// TODO: Complete the function
+    const buttons = getGameBoardButtons();
+    const availableButtons = [...buttons].filter(button => button.innerHTML === "");
+    const randomIndex = Math.floor(Math.random() * availableButtons.length);
+    const button = availableButtons[randomIndex];
+    button.innerHTML = "O";
+    button.disabled = true;
+    switchTurn();
 }

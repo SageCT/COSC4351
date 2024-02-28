@@ -3,8 +3,18 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 
 function showCircleClick() {
-   // TODO: Add modifications here
-   showCircle(160, 180, 120);
+   showCircle(160, 180, 120).then(
+      // If the promise is fulfilled
+      function(div) {
+         // Add "Ta da!" message to the div's inner HTML
+         div.innerHTML += "Ta da!";
+      },
+      // If the promise is rejected
+      function(error) {
+         // Display an error message using alert()
+         alert(error);
+      }
+   );
 }
 
 // Do not modify the code below

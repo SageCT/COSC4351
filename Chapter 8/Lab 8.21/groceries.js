@@ -62,13 +62,27 @@ function clearBtnClick() {
 // Complete the functions below
 
 function loadList() {
+   // Load the grocery list from localStorage
+   const storedList = localStorage.getItem("list");
    
+   // If there's no stored list, return an empty array
+   if (!storedList) {
+       return [];
+   }
+   
+   // Split the stored string into an array of items
+   return storedList.split(",");
 }
 
 function saveList(groceryList) {
-  
+   // Convert the groceryList array into a comma-delimited string
+   const listString = groceryList.join(",");
+   
+   // Save the string to localStorage under the key "list"
+   localStorage.setItem("list", listString);
 }
 
 function clearList() {
-   
+   // Remove the "list" item from localStorage
+   localStorage.removeItem("list");
 }

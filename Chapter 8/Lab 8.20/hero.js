@@ -5,9 +5,27 @@ class SuperHuman {
 	}
 }
 
-// Define SuperHero and SuperVillain classes here
+class SuperHero extends SuperHuman {
+	constructor(name, alias, powerLevel) {
+		super(name, powerLevel);
+		this.alias = alias;
+	}
+  
+	battle(villain) {
+		return this.powerLevel >= villain.powerLevel;
+	}
+}
 
+class SuperVillain extends SuperHuman {
+	constructor(name, alias, powerLevel) {
+		super(name, powerLevel);
+		this.alias = alias;
+	}
 
+	getEvilChuckle() {
+		return "Ha ha ha!";
+	}
+}
 
 const heroes = {
 	"Super Bacon": new SuperHero("Jack Oinker", "Super Bacon", 2),
@@ -41,6 +59,8 @@ function selectionChanged() {
 	const selectedHero = heroes[selectedHeroValue];
 	const selectedVillain = villains[selectedVillainValue];
 
-	// Your code goes here
-
+	if (selectedHero && selectedVillain) {
+		const winner = selectedHero.battle(selectedVillain) ? selectedHero.alias : selectedVillain.alias;
+		document.getElementById("winner").textContent = `Winner: ${winner}!`;
+	}
 }

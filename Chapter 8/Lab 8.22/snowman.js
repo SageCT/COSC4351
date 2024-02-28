@@ -33,13 +33,53 @@ function drawSnowflakes(canvas) {
 // Complete the functions below
 
 function drawSnowText(canvas) {
+   let context = canvas.getContext("2d");
 
+   // Set font properties
+   context.font = "80px Verdana";
+   context.textAlign = "center";
+   context.textBaseline = "top";
+   context.fillStyle = "blue";
+
+   // Display the text "SNOW"
+   context.fillText("SNOW", canvas.width / 2, 10);
 }
 
-function drawSnowman(canvas) { 
+function drawSnowman(canvas) {
+   let context = canvas.getContext("2d");
 
+   // Bottom circle
+   context.beginPath();
+   context.arc(150, 200, 50, 0, Math.PI * 2);
+   context.fillStyle = "white";
+   context.fill();
+
+   // Middle circle
+   context.beginPath();
+   context.arc(150, 120, 40, 0, Math.PI * 2);
+   context.fillStyle = "white";
+   context.fill();
+
+   // Top circle
+   context.beginPath();
+   context.arc(150, 60, 25, 0, Math.PI * 2);
+   context.fillStyle = "white";
+   context.fill();
 }
 
 function drawSingleFlake(canvas, x, y) {
+   let context = canvas.getContext("2d");
 
+   // Start a new path
+   context.beginPath();
+
+   // Draw the diamond shape
+   context.moveTo(x, y);
+   context.lineTo(x + flakeSize / 2, y + flakeSize / 2);
+   context.lineTo(x, y + flakeSize);
+   context.lineTo(x - flakeSize / 2, y + flakeSize / 2);
+
+   // Set fill style and fill the shape
+   context.fillStyle = "white";
+   context.fill();
 }
