@@ -2,7 +2,6 @@
 let game = {
   lives: 3,
   coins: 0,
-  points: 1,
   playerDies: function () {
     if (this.lives > 0) this.lives--;
   },
@@ -11,7 +10,7 @@ let game = {
     this.coins = 0;
     this.points = 0;
   },
-  Points: function () {
+  get points() {
     return this.coins * 10;
   },
 };
